@@ -1,0 +1,30 @@
+path: minio://datasets
+
+train:
+  images:
+  - AIC/ai_challenger_keypoint_train_20170902/keypoint_train_images_20170902
+  - Coco2017/train2017
+  - CrowdPose/images
+  - HumanArt/images/real_human/acrobatics
+  - HumanArt/images/real_human/dance
+  - HumanArt/images/real_human/drama
+  - OCHuman/images
+  labels:
+  - AIC/annotations/aic_train_dets
+  - Coco2017/annotations/coco_wholebody_train_v1.0_dets
+  - CrowdPose/annotations/crowdpose_train_dets
+  - HumanArt/annotations/training_humanart_acrobatics_dets
+  - HumanArt/annotations/training_humanart_dance_dets
+  - HumanArt/annotations/training_humanart_drama_dets
+  - OCHuman/annotations/ochuman_coco_format_val_range_0.00_1.00_dets
+
+val:
+  images:
+  - AIC/ai_challenger_keypoint_validation_20170911/keypoint_validation_images_20170911
+  - Coco2017/val2017
+  labels:
+  - AIC/annotations/aic_val_dets
+  - Coco2017/annotations/coco_wholebody_val_v1.0_dets
+
+names:
+  0: person
