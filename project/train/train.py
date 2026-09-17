@@ -1,23 +1,40 @@
+import torch.multiprocessing as mp
+
+mp.set_start_method("spawn", force=True)
+import os
+import sys
+from pathlib import Path
+
+THIS_DIR = str(Path(__file__).resolve().parent)
+
+if THIS_DIR not in sys.path:
+    sys.path.insert(0, THIS_DIR)
+
+os.environ["PYTHONPATH"] = os.pathsep.join(
+    filter(None, [THIS_DIR, os.environ.get("PYTHONPATH", "")])
+)
+
 import logging
 import mlflow
+from model import MinioYOLO
 from dotenv import load_dotenv
 
 load_dotenv(".env")
 
-from ultralytics import settings, YOLO
-from trainer import MinIOTrainer
+from ultralytics import settings
 
 
 def main(model_name: str) -> None:
-    model = YOLO(f"{model_name}.pt")
+    model = MinioYOLO(f"{model_name}.pt")
     model.train(
+        device="0,1",
         data="custom.yaml",
-        trainer=MinIOTrainer,
         epochs=100,
         imgsz=640,
         workers=4,
         cache=False,
-        batch=64
+        batch=64,
+        plots = True
     )
 
 
